@@ -51,7 +51,7 @@ const fetchSavedBook = (bookId) => {
         + bookId;
     fetch(url)
         .then(response => response.json())
-        .then((data) => {console.log('booksaved:'+data); createdElementBook('content',data);})
+        .then((data) => {console.log('booksaved:'+data); createdElementBook('pochlistSection',data);})
         .catch(error => { alert(error) });
 }
 //API VIA FETCH 
@@ -137,6 +137,18 @@ const newSection = () => {
 }
 newSection();
 
+const pochListeSection = () => {
+
+    const parent = document.getElementById('content');
+    const child = parent.children[0];
+    console.log(parent.children[0]);
+    const pochlistSection = document.createElement('section');
+    pochlistSection.id = 'pochlistSection';
+    child.after(pochlistSection);
+
+}
+pochListeSection();
+
 const createdElementBook = (selectedDiv, book) => {
 
     // Création d'une section pour y mettre les cards 
@@ -151,8 +163,7 @@ const createdElementBook = (selectedDiv, book) => {
     const divFavIcon = document.createElement('div');
     const imageCard = document.createElement('img');
     const header = document.createElement('div');
-    const pochListe = document.querySelector('h2');
-
+    
     //Création des classes dont on a besoin 
     sectionBloc.className = "sectionBloc";
     bookContent.className = "bookContent";
@@ -163,7 +174,6 @@ const createdElementBook = (selectedDiv, book) => {
     imageCard.className = 'imageCard';
     header.className = 'header';
     divFavIcon.className = 'divFavIcon';
-    pochListe.className = 'pochListe';
 
     divFavIcon.id = book.id;
     titleCard.textContent = 'Titre : ' + book.volumeInfo.title;
@@ -210,9 +220,7 @@ const createdElementBook = (selectedDiv, book) => {
     bookContent.appendChild(imageCard);
     sectionBloc.append(bookContent);
     
-
 }
-createdElementBook();
 
 const favoriteBook = (bookContent) => {
     //adEvent de l'icon bookmark 
