@@ -137,6 +137,7 @@ const newSection = () => {
 }
 newSection();
 
+//fonction qui permet de placer le pochListe correctement
 const pochListeSection = () => {
 
     const parent = document.getElementById('content');
@@ -213,7 +214,7 @@ const createdElementBook = (selectedDiv, book) => {
     })
     bookContent.append(header);
     header.append(titleCard);
-    header.append(divFavIcon);
+    header.append(trashIcone);
     bookContent.appendChild(idBook);
     bookContent.appendChild(authorCard);
     bookContent.appendChild(description);
@@ -223,11 +224,15 @@ const createdElementBook = (selectedDiv, book) => {
 }
 
 const favoriteBook = (bookContent) => {
-    //adEvent de l'icon bookmark 
-    this.divFavIcon.addEventListener('click', (e) => {
-        e.preventDefault();
         //création d'un tableau vide
         const books = [];
+      //création d'une div afin d'y mettre la corbelle
+        const trashIcone = document.createElement('div');
+        trashIcone.className = 'trashIcone';
+        trashIcone.innerHTML = '<i class="fas fa-trash-alt"></i>';
+        //adEvent de la corbeille
+       trashIcone.addEventListener('click', (e) => {
+        e.preventDefault();
         //si le livre existe déjà dans le tableau, j'obtiens ce livre dans localeStorage avec getItem
         if (localStorage.getItem('bookContent') !== null)
             books = JSON.parse(localStorage.getItem('bookContent'));
