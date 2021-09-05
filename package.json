@@ -1,0 +1,14 @@
+{
+  "name": "pochlib",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch /Users/camelia95/Documents/pochlib/design/sass/default.scss://Users/camelia95/Documents/pochlib/design/css/default.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.6.0"
+  }
+}

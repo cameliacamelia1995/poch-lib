@@ -1,0 +1,195 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.title {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  height: 40px;
+  align-content: space-between;
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  background-color: #ebeef2;
+  box-shadow: 1px 1px 1px 1px rgba(95, 94, 94, 0.5);
+  width: 60%;
+  font-size: 15px;
+  padding-top: 25px;
+}
+
+#content {
+  padding-bottom: 200px;
+}
+
+h2 {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.2em;
+  font-weight: bolder;
+  margin-bottom: 30px;
+}
+
+.newButton {
+  display: block;
+  color: white;
+  margin: auto;
+  background-color: #048a76;
+  margin-top: 15px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  width: 155px;
+}
+
+img {
+  display: block;
+  width: 45%;
+  margin: auto;
+}
+
+.titleBook {
+  display: block;
+  width: 99%;
+  height: 20px;
+  margin-left: 10px;
+  margin-bottom: 25px;
+}
+
+.author {
+  display: block;
+  width: 99%;
+  height: 20px;
+  margin-left: 10px;
+  margin-bottom: 25px;
+}
+
+.searchButton {
+  display: block;
+  color: white;
+  background-color: #048a76;
+  margin-top: 20px;
+  margin-left: 10px;
+  width: 155px;
+  border-bottom: 1px black solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  cursor: pointer;
+}
+
+.cancelButton {
+  display: block;
+  color: white;
+  background-color: rgba(214, 51, 10, 0.842);
+  margin-top: 15px;
+  margin-left: 10px;
+  width: 155px;
+  border-bottom: 1px black solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  cursor: pointer;
+}
+
+hr {
+  display: block;
+  unicode-bidi: isolate;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+  margin-inline-start: auto;
+  margin-top: 20px;
+  margin-inline-end: auto;
+  overflow: hidden;
+  border-style: inset;
+  border-width: 1px;
+}
+
+.div,
+.labelTitleOfBook,
+.labelAuthor {
+  display: flex;
+  align-content: space-between;
+  margin-left: 15px;
+  height: 30px;
+}
+
+.idBook,
+.titleCard {
+  font-family: "Roboto", sans-serif;
+  text-align: left;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.authorCard,
+.description {
+  margin-left: 10px;
+}
+
+.sectionBloc {
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+}
+
+.bookContent,
+.divFavIcon {
+  height: 490px;
+  width: 540px;
+  margin: 50px;
+}
+
+.bookContent {
+  display: flex;
+  display: inline;
+  border: 1px solid black;
+  background-color: #d8d5d5;
+  margin-left: 0px;
+}
+
+.imageCard {
+  height: 200px;
+  width: 150px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 500px;
+}
+
+.header, .divFavIcon {
+  max-height: 50px;
+  margin: 0px;
+}
+
+.divFavIcon {
+  display: flex;
+  display: block;
+  color: #048a76;
+  width: auto;
+  margin-right: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.titleCard {
+  display: inline-block;
+}
+
+.searchBookResult {
+
+  align-self: center;
+  display: block;
+  width: auto;
+  margin: fit-content;
+  padding: fit-content;
+  max-height: 20px;
+  position: relative;
+  margin-bottom: 5%;
+}
