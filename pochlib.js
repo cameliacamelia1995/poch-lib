@@ -251,6 +251,7 @@ const favoriteBook = (bookContent) => {
 }
 const favsectionBloc = document.createElement('div');
 favsectionBloc.className = "favsectionBloc";
+
 const placingfavs = () => {
 
     //Création des éléments pour les favoris 
@@ -287,10 +288,10 @@ const placingfavs = () => {
 const createdFavoriteBook = () => {
 
     if (localStorage.getItem('bookContent') !== null && localStorage.getItem('bookContent') !== undefined) {
-        let favoritelivre = localStorage.getItem('bookContent');
-        let foundlivre = JSON.parse(favoritelivre);
+        let favoriteBook = localStorage.getItem('bookContent');
+        let foundBook = JSON.parse(favoriteBook);
 
-        for (const livre in foundlivre) {
+        for (const book in foundBook) {
             placingfavs();
             avtitleCard.textContent = 'Titre : ' + book.volumeInfo.title;
             favidBook.textContent = 'Id : ' + book.id;
@@ -308,8 +309,8 @@ const createdFavoriteBook = () => {
             //adEvent de la corbeille
             trashIcone.addEventListener('click', (e) => {
                 e.preventDefault();
-                foundlivre.splice(livre, 1);
-                localStorage.setItem('livre', JSON.stringify(foundlivre));
+                foundBook.splice(livre, 1);
+                localStorage.setItem('livre', JSON.stringify(foundBook));
                 location.reload();
                 return false;
             })
