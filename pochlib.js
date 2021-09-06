@@ -13,6 +13,12 @@ const labelAuthor = document.createElement('label');
 const div = document.createElement('div');
 //Section qui englobe resultat de recherche + les cards 
 const searchBookResult = document.createElement('section');
+const sectionFav = document.createElement('section');
+//création d'une div afin d'y mettre la corbelle
+const trashIcone = document.createElement('div');
+trashIcone.className = 'trashIcone';
+sectionFav.className = 'sectionFav';
+trashIcone.innerHTML = '<i class="fas fa-trash-alt"></i>';
 
 
 //Fonction qui permet de faire disparaitre le bouton ajouter un livre 
@@ -38,11 +44,11 @@ const showElement = () => {
     formCancel.appendChild(cancelButton);
 
 }
-    //création de resultat de recherche
-    const searchTitle = document.createElement('h2');
-    searchTitle.className = 'titreRech';
-    searchTitle.innerHTML = 'Résultats de Recherche';
-    
+//création de resultat de recherche
+const searchTitle = document.createElement('h2');
+searchTitle.className = 'titreRech';
+searchTitle.innerHTML = 'Résultats de Recherche';
+
 
 //fetch pour récupéré les livres qui sont déjà sauvegardé
 const fetchSavedBook = (bookId) => {
@@ -51,7 +57,7 @@ const fetchSavedBook = (bookId) => {
         + bookId;
     fetch(url)
         .then(response => response.json())
-        .then((data) => {console.log('booksaved:'+data); createdElementBook('pochlistSection',data);})
+        .then((data) => { console.log('booksaved:' + data); createdElementBook('pochlistSection', data); })
         .catch(error => { alert(error) });
 }
 //API VIA FETCH 
@@ -68,7 +74,7 @@ const fetchBook = () => {
     console.log(url);
     fetch(url)
         .then(response => response.json())
-        .then((data) => data.items.forEach((book) => { console.log(book); createdElementBook('section',book); }))
+        .then((data) => data.items.forEach((book) => { console.log(book); createdElementBook('section', book); }))
         .catch(error => { alert(error) });
 
     formSearch.addEventListener(('submit'), (e) => {
@@ -80,8 +86,8 @@ const fetchBook = () => {
 
 const initHTML = () => {
 
-    console.log('bla'+localStorage.getItem('bookContent'));
-    if(localStorage.getItem('bookContent')!=null){
+    console.log('bla' + localStorage.getItem('bookContent'));
+    if (localStorage.getItem('bookContent') != null) {
         const books = JSON.parse(localStorage.getItem('bookContent'));
         books.forEach(book => {
             fetchSavedBook(book);
@@ -129,7 +135,7 @@ const newSection = () => {
     const searchResult = document.createElement('h3');
     searchResult.className = 'h3';
     searchResult.innerHTML = 'Résultat de recherche';
-    
+
     searchBookResult.style.display = 'none';
     content.before(searchBookResult);
     searchBookResult.appendChild(sectionBloc);
@@ -138,7 +144,7 @@ const newSection = () => {
 newSection();
 
 //fonction qui permet de placer le pochListe correctement
-const pochListeSection = () => {
+const pochListePlacement = () => {
 
     const parent = document.getElementById('content');
     const child = parent.children[0];
@@ -148,7 +154,7 @@ const pochListeSection = () => {
     child.after(pochlistSection);
 
 }
-pochListeSection();
+pochListePlacement();
 
 const createdElementBook = (selectedDiv, book) => {
 
@@ -164,7 +170,7 @@ const createdElementBook = (selectedDiv, book) => {
     const divFavIcon = document.createElement('div');
     const imageCard = document.createElement('img');
     const header = document.createElement('div');
-    
+
     //Création des classes dont on a besoin 
     sectionBloc.className = "sectionBloc";
     bookContent.className = "bookContent";
@@ -214,24 +220,20 @@ const createdElementBook = (selectedDiv, book) => {
     })
     bookContent.append(header);
     header.append(titleCard);
-    header.append(trashIcone);
+    header.append(divFavIcon);
     bookContent.appendChild(idBook);
     bookContent.appendChild(authorCard);
     bookContent.appendChild(description);
     bookContent.appendChild(imageCard);
     sectionBloc.append(bookContent);
-    
+
 }
 
 const favoriteBook = (bookContent) => {
-        //création d'un tableau vide
-        const books = [];
-      //création d'une div afin d'y mettre la corbelle
-        const trashIcone = document.createElement('div');
-        trashIcone.className = 'trashIcone';
-        trashIcone.innerHTML = '<i class="fas fa-trash-alt"></i>';
-        //adEvent de la corbeille
-       trashIcone.addEventListener('click', (e) => {
+    //création d'un tableau vide
+    const books = [];
+    //adEvent de la corbeille
+    trashIcone.addEventListener('click', (e) => {
         e.preventDefault();
         //si le livre existe déjà dans le tableau, j'obtiens ce livre dans localeStorage avec getItem
         if (localStorage.getItem('bookContent') !== null)
@@ -246,4 +248,71 @@ const favoriteBook = (bookContent) => {
             books.push(bookContent);
         }
     })
+}
+const favsectionBloc = document.createElement('div');
+favsectionBloc.className = "favsectionBloc";
+const placingfavs = () => {
+
+    //Création des éléments pour les favoris 
+    const favbookContent = document.createElement('div');
+    const favtitleCard = document.createElement('p');
+    const favidBook = document.createElement('p');
+    const favauthorCard = document.createElement('p');
+    const favdescription = document.createElement('p');
+    //création d'une div afin d'y mettre le book mark
+    const favimageCard = document.createElement('img');
+    const favheader = document.createElement('div');
+
+    favsectionBloc.className = "favsectionBloc";
+    favbookContent.className = "bookContent";
+    favtitleCard.className = 'favtitleCard';
+    favidBook.className = 'idBook';
+    favauthorCard.className = 'authorCard';
+    favdescription.className = 'favdescription'
+    favimageCard.className = 'imageCard';
+    favheader.className = 'header';
+
+
+
+    favbookContent.append(favheader);
+    favheader.append(favtitleCard);
+    favheader.append(trashIcone);
+    favbookContent.appendChild(favidBook);
+    favbookContent.appendChild(favauthorCard);
+    favbookContent.appendChild(favdescription);
+    favbookContent.appendChild(favimageCard);
+    sectionFav.append(favbookContent);
+}
+
+const createdFavoriteBook = () => {
+
+    if (localStorage.getItem('bookContent') !== null && localStorage.getItem('bookContent') !== undefined) {
+        let favoritelivre = localStorage.getItem('bookContent');
+        let foundlivre = JSON.parse(favoritelivre);
+
+        for (const livre in foundlivre) {
+            placingfavs();
+            avtitleCard.textContent = 'Titre : ' + book.volumeInfo.title;
+            favidBook.textContent = 'Id : ' + book.id;
+            //condition pour afficher que le premier auteur 
+            favauthorCard.textContent = book.volumeInfo.authors === undefined ? book.author = "" : 'Auteur : ' + book.volumeInfo.authors[0];
+            // condition pour que la description soit limité a 200
+            favdescription.textContent = book.volumeInfo.description.length > 200 ? 'Description : ' + book.volumeInfo.description.substring(0, 200) + '...' : 'Description : ' + book.volumeInfo.description;
+            //condition pour afficher les photos des livres et afficher l'image unvailable quand y en a pas
+            if (book.volumeInfo.imageLinks === null || book.volumeInfo.imageLinks === undefined) {
+                favimageCard.src = "/Users/camelia95/Documents/pochlib/pictures/unavailable.png";
+            } else {
+                favimageCard.src = book.volumeInfo.imageLinks.thumbnail;
+            }
+
+            //adEvent de la corbeille
+            trashIcone.addEventListener('click', (e) => {
+                e.preventDefault();
+                foundlivre.splice(livre, 1);
+                localStorage.setItem('livre', JSON.stringify(foundlivre));
+                location.reload();
+                return false;
+            })
+        }
+    }
 }
