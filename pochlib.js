@@ -14,12 +14,7 @@ const div = document.createElement('div');
 //Section qui englobe resultat de recherche + les cards 
 const searchBookResult = document.createElement('section');
 const sectionFav = document.createElement('section');
-//création d'une div afin d'y mettre la corbelle
-const trashIcone = document.createElement('div');
-trashIcone.className = 'trashIcone';
 sectionFav.className = 'sectionFav';
-trashIcone.innerHTML = '<i class="fas fa-trash-alt"></i>';
-
 
 //Fonction qui permet de faire disparaitre le bouton ajouter un livre 
 //ainsi que recherche de recherche 
@@ -170,6 +165,9 @@ const createdElementBook = (selectedDiv, book) => {
     const divFavIcon = document.createElement('div');
     const imageCard = document.createElement('img');
     const header = document.createElement('div');
+    //création d'une div afin d'y mettre la corbelle
+    const trashIcone = document.createElement('div');
+
 
     //Création des classes dont on a besoin 
     sectionBloc.className = "sectionBloc";
@@ -181,6 +179,7 @@ const createdElementBook = (selectedDiv, book) => {
     imageCard.className = 'imageCard';
     header.className = 'header';
     divFavIcon.className = 'divFavIcon';
+    trashIcone.className = 'trashIcone';
 
     divFavIcon.id = book.id;
     titleCard.textContent = 'Titre : ' + book.volumeInfo.title;
@@ -190,6 +189,7 @@ const createdElementBook = (selectedDiv, book) => {
     // condition pour que la description soit limité a 200
     description.textContent = book.volumeInfo.description.length > 200 ? 'Description : ' + book.volumeInfo.description.substring(0, 200) + '...' : 'Description : ' + book.volumeInfo.description;
     divFavIcon.innerHTML = '<i class="fas fa-bookmark"></i>';
+    trashIcone.innerHTML = '<i class="fas fa-trash-alt"></i>';
 
     //condition pour afficher les photos des livres et afficher l'image unvailable quand y en a pas
     if (book.volumeInfo.imageLinks === null || book.volumeInfo.imageLinks === undefined) {
@@ -220,13 +220,12 @@ const createdElementBook = (selectedDiv, book) => {
     })
     bookContent.append(header);
     header.append(titleCard);
-    header.append(divFavIcon);
+    header.append(trashIcone);
     bookContent.appendChild(idBook);
     bookContent.appendChild(authorCard);
     bookContent.appendChild(description);
     bookContent.appendChild(imageCard);
     sectionBloc.append(bookContent);
-
 }
 
 const favoriteBook = (bookContent) => {
@@ -260,7 +259,6 @@ const placingfavs = () => {
     const favidBook = document.createElement('p');
     const favauthorCard = document.createElement('p');
     const favdescription = document.createElement('p');
-    //création d'une div afin d'y mettre le book mark
     const favimageCard = document.createElement('img');
     const favheader = document.createElement('div');
 
@@ -277,43 +275,39 @@ const placingfavs = () => {
 
     favbookContent.append(favheader);
     favheader.append(favtitleCard);
-    favheader.append(trashIcone);
+    header.append(trashIcone);
     favbookContent.appendChild(favidBook);
     favbookContent.appendChild(favauthorCard);
     favbookContent.appendChild(favdescription);
     favbookContent.appendChild(favimageCard);
     sectionFav.append(favbookContent);
 }
-
+ header.append(trashIcone)
 const createdFavoriteBook = () => {
 
     if (localStorage.getItem('bookContent') !== null && localStorage.getItem('bookContent') !== undefined) {
-        let favoriteBook = localStorage.getItem('bookContent');
-        let foundBook = JSON.parse(favoriteBook);
+        let favoritelivre = localStorage.getItem('bookContent');
+        let foundlivre = JSON.parse(favoritelivre);
 
-        for (const book in foundBook) {
+        for (const livre in foundlivre) {
             placingfavs();
-            avtitleCard.textContent = 'Titre : ' + book.volumeInfo.title;
-            favidBook.textContent = 'Id : ' + book.id;
+            favtitleCard.textContent = 'Titre : ' + foundlivre[livre].volumeInfo.title;
+            favidBook.textContent = 'Id : ' + foundlivre[livre].id;
             //condition pour afficher que le premier auteur 
-            favauthorCard.textContent = book.volumeInfo.authors === undefined ? book.author = "" : 'Auteur : ' + book.volumeInfo.authors[0];
-            // condition pour que la description soit limité a 200
-            favdescription.textContent = book.volumeInfo.description.length > 200 ? 'Description : ' + book.volumeInfo.description.substring(0, 200) + '...' : 'Description : ' + book.volumeInfo.description;
-            //condition pour afficher les photos des livres et afficher l'image unvailable quand y en a pas
-            if (book.volumeInfo.imageLinks === null || book.volumeInfo.imageLinks === undefined) {
-                favimageCard.src = "/Users/camelia95/Documents/pochlib/pictures/unavailable.png";
-            } else {
-                favimageCard.src = book.volumeInfo.imageLinks.thumbnail;
-            }
+           favauthorCard.textContent = foundlivre[livre].volumeInfo.authors === undefined ? foundlivre[livre].author = "" : 'Auteur : ' + foundlivre[livre].authors[0];
+           // condition pour que la description soit limité a 200
+           favdescription.textContent = foundlivre[livre].volumeInfo.description.length > 200 ? 'Description : ' + foundlivre[livre].volumeInfo.description.substring(0, 200) + '...' : 'Description : ' + foundlivre[livre].volumeInfo.description;
+        //condition pour afficher les photos des livres et afficher l'image unvailable quand y en a pas
+        if (foundlivre[livre].volumeInfo.imageLinks === null || foundlivre[livre].volumeInfo.imageLinks === undefined) {
+        favimageCard.src = "/Users/camelia95/Documents/pochlib/pictures/unavailable.png";
+        } else {
+        favimageCard.src = foundlivre[livre].volumeInfo.imageLinks.thumbnail; }
 
-            //adEvent de la corbeille
-            trashIcone.addEventListener('click', (e) => {
-                e.preventDefault();
-                foundBook.splice(livre, 1);
-                localStorage.setItem('livre', JSON.stringify(foundBook));
-                location.reload();
-                return false;
-            })
-        }
-    }
-}
+//adEvent de la corbeille
+    trashIcone.addEventListener('click', (e) => {
+        e.preventDefault();
+        foundlivre.splice(livre, 1);
+        localStorage.setItem('livre', JSON.stringify(foundlivre));
+        location.reload();
+        return false;
+    })}}}
