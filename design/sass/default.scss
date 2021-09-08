@@ -178,12 +178,21 @@ hr {
   cursor: pointer;
 }
 
+.trashIcone {
+  display: flex;
+  display: block;
+  color: #d80521;
+  width: auto;
+  margin-right: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
 .titleCard {
   display: inline-block;
 }
 
 .searchBookResult {
-
   align-self: center;
   display: block;
   width: auto;
