@@ -44,7 +44,7 @@ searchTitle.className = 'titreRech';
 searchTitle.innerHTML = 'Résultats de Recherche';
 
 
-//fetch pour récupéré les livres qui sont déjà sauvegardé
+//Fetch pour récupérer les livres qui sont déjà sauvegardé
 const fetchSavedBook = (bookId) => {
 
     const url = 'https://www.googleapis.com/books/v1/volumes/'
@@ -54,7 +54,7 @@ const fetchSavedBook = (bookId) => {
         .then((data) => { console.log('booksaved:' + data); createdElementBook('pochlistSection', data, true); })
         .catch(error => { alert(error) });
 }
-//API via fetch qui permet de récupéré les livres
+//API via fetch qui permet de récupérer les livres
 const fetchBook = () => {
 
     const titleSearch = document.querySelector('.titleBook').value;
@@ -80,7 +80,7 @@ const fetchBook = () => {
 
 const initHTML = () => {
 
-    //Condition qui permet d'afficher les livres en favoris en début de page
+    //Condition qui permet d'aller chercher les livres sauvagardés dans le local storage
     if (localStorage.getItem('bookContent') != null) {
         const books = JSON.parse(localStorage.getItem('bookContent'));
         books.forEach(book => {
@@ -115,7 +115,6 @@ const initHTML = () => {
     addBookButton.addEventListener('click', showElement);
     cancelButton.addEventListener('click', cancelSearch);
     searchButton.addEventListener('click', fetchBook);
-
 }
 initHTML();
 
@@ -175,7 +174,7 @@ const createdElementBook = (selectedDiv, book, isPochliste) => {
     idBook.textContent = 'Id : ' + book.id;
     //condition pour afficher le premier auteur du livre
     authorCard.textContent = book.volumeInfo.authors === undefined ? book.author = "" : 'Auteur : ' + book.volumeInfo.authors[0];
-    // condition pour que la description soit limité a 200 caractères
+    // condition pour que la description soit limitée a 200 caractères
     description.textContent = book.volumeInfo.description.length > 200 ? 'Description : ' + book.volumeInfo.description.substring(0, 200) + '...' : 'Description : ' + book.volumeInfo.description;
 
     //condition pour afficher les photos des livres et afficher l'image unvailable quand l'image est indisponible
@@ -217,15 +216,15 @@ const createdElementBook = (selectedDiv, book, isPochliste) => {
         divFavIcon.innerHTML = '<i class="fas fa-bookmark"></i>';
         divFavIcon.addEventListener('click', (e) => {
             e.preventDefault();
-            //
+
             const id = e.target.parentElement.id;
             //Création d'un tableau vide
             let books = [];
             //si le livre existe déjà dans le tableau, j'obtiens ce livre dans localeStorage avec getItem
             if (localStorage.getItem('bookContent') !== null)
                 books = JSON.parse(localStorage.getItem('bookContent'));
-            //si le livre trouvé a la même ID que le livre cliqué, il faut alors afficher une alerte
-            //la méthode SOME permet de retourner une valeur vrai 
+            //Si le livre trouvé a la même ID que le livre cliqué, il faut alors afficher une alerte
+            //La méthode SOME permet de comparer des valeurs dans un tableau
             if (books.some(bookId => bookId === id)) {
                 alert(" Vous ne pouvez ajouter deux fois le même livre ")
             } else {
