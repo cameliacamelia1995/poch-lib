@@ -111,7 +111,6 @@ const initHTML = () => {
     searchButton.innerHTML = "Recherche";
     cancelButton.innerHTML = "Annuler";
 
-    //PLACEMENT DES ELEMENTS & DES FONCTION POUR QUE LE BOUTON DISPARAISE 
     addBookButton.addEventListener('click', showElement);
     cancelButton.addEventListener('click', cancelSearch);
     searchButton.addEventListener('click', fetchBook);
